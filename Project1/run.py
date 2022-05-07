@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     # instantiate model
     model = RobustModel()
-    model.load_state_dict(torch.load(args.load_model),strict=False)
+    model.load_state_dict(torch.load(args.load_model))
 
     # load dataset in test image folder
     test_data = ImageDataset(args.dataset)
@@ -62,13 +62,6 @@ if __name__ == '__main__':
 
     # write model inference
     preds = inference(test_loader, model)
-    answer = [7,2,1,0,4,1,4,9,5,9,0,6,9,0,1,5,9,7,3,4,9,6,6,5,4,0,7,4]
-    at = 0
-    for i in range(29):
-        if preds[i] == answer[i]:
-            at = at+1
-
-    print("accuracy", at/30)
 
     with open('result.txt', 'w') as f:
         f.writelines('\n'.join(map(str, preds)))

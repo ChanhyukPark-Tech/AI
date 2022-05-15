@@ -81,7 +81,6 @@ def mnist_preview(mnist, augmented, n=5):
 
         plt.figure()
         f, axarr = plt.subplots(1,2) 
-        print(axarr)
         axarr[0].imshow(origin, cmap='gray')
         axarr[1].imshow(augment)
         
@@ -146,7 +145,7 @@ class RobustModel(nn.Module):
 
     def forward(self,x):
         if x.shape[1] == 28:
-            x = x.permute(0,3,2,1)
+            x = np.transpose(x, (0, 3, 1, 2))
 
         out=self.layer1(x)
         out=self.layer2(out)
@@ -178,7 +177,7 @@ def test(data_loader,model):
     accuracy=int(n_correct)/n_predict #n_correct가 tensor형태로 읽어져서 accuracy계속0으로 출력되어 형변환
     print(f"Accuracy:{accuracy}()")
 
-training_epoch=5
+training_epoch=20
 
 for epoch in range(training_epoch):
     #model.train()

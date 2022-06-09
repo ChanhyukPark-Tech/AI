@@ -17,7 +17,7 @@ class BaseModel(nn.Module):
         TODO: Implement your own model. You can change the model architecture.
         """
         self.embedding = nn.Embedding(input_size, embedding_dim)
-        self.rnn = nn.RNN(embedding_dim, hidden_dim, num_layers, batch_first=batch_first)
+        self.rnn = nn.LSTM(embedding_dim, hidden_dim, num_layers, batch_first=batch_first)
         self.fc = nn.Linear(hidden_dim, output_size)
 
     # the size of x in forward is (seq_length, batch_size) if batch_first=False
